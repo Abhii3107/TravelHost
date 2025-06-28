@@ -5,6 +5,7 @@ const path= require("path");
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
+app.use(express.urlencoded({extended : true}));
 
 const Listing = require("./models/listing.js");
 
@@ -31,25 +32,36 @@ app.get("/",(req,res) =>{
 });
 
 
-app.get("/testListing", async(req,res) =>{
+// app.get("/testListing", async(req,res) =>{
 
-           let sampleListing = new Listing({
-            title:"My New Villa",
-            description:"By the Beach",
-            price: 1200,
-            location : "Calangute , Goa",
-            country: "India"
-           });
+//            let sampleListing = new Listing({
+//             title:"My New Villa",
+//             description:"By the Beach",
+//             price: 1200,
+//             location : "Calangute , Goa",
+//             country: "India"
+//            });
     
-    await sampleListing.save();
-    console.log("sample is saved");
-    res.send("Succesful testing");
+//     await sampleListing.save();
+//     console.log("sample is saved");
+//     res.send("Succesful testing");
+// });
+
+//-------------------------------
+
+//INDEX ROUTE
+app.get("/listings",async (req,res) =>{
+  const allListing = await Listing.find({});
+  res.render("listings/index.ejs",{allListing});
 });
 
+ //Show Route   -  GET /listing/:id ->specific Data 
 
-
-
-
+app.get("/listing/:id", async(req,res) =>{
+    let {id}= req.params;
+    const listing = await Listing.findById(id); 
+    res.render("listings/show.ejs",{listing});   
+});
 
 
 
