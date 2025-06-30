@@ -1,6 +1,6 @@
-/* body{
-    background-color: pink;
-} */
+body{
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+}
 
 /*Navbar*/
 
@@ -47,4 +47,37 @@
 
 .f-info-socials i{
     margin-right: 1rem;
+}
+
+.card{
+    border:none ;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{          /*image styling*/
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.card-text{
+    font-weight: 400 !important;
+}
+
+.listing-link{
+    text-decoration: none;
+}
+
+/*card Effect*/
+.card-img-overlay{
+    opacity:0;
+}
+
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
 }
