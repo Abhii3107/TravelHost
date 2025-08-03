@@ -21,7 +21,7 @@ let validateListing = (req , res ,next)=>{
 }
 
 //INDEX ROUTE
-app.get("/", wrapAsync(async (req, res) => {
+router.get("/", wrapAsync(async (req, res) => {
   const allListing = await Listing.find({});
   res.render("listings/index.ejs", { allListing });
 }));
@@ -29,7 +29,7 @@ app.get("/", wrapAsync(async (req, res) => {
 //----------------------------------------------
 // Create Route
 
-app.get("/new", (req, res) => {
+router.get("/new", (req, res) => {
 //In Express, routes are matched top to bottom
   res.render("new.ejs"); //In Express, always define static routes first, and dynamic (:params) routes later.Otherwise, the dynamic ones will hijack the request.
   // if we write show route above from create route
