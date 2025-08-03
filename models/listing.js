@@ -25,7 +25,7 @@ const listingSchema = new Schema({
     ]
 });
 
-listingSchema.post("findOneAndDelete" , async(listing) => {
+listingSchema.post("findOneAndDelete" , async(listing) => { // now when any listing is deleted its review is also deleted from review collection
     if(listing){
      await Review.deleteMany({_id : {$in: listing.reviews}});
     }
