@@ -1,5 +1,4 @@
 const Joi = require("joi"); // it validate schema
-const { comment } = require("postcss");
 
 module.exports.listingSchema = Joi.object({
     listing : Joi.object({                         // listing.required - means listing to hona hi chayie aur uske ke andr kya required hona chayie
