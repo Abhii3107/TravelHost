@@ -31,7 +31,7 @@ router.get("/", wrapAsync(async (req, res) => {
 
 router.get("/new", (req, res) => {
 //In Express, routes are matched top to bottom
-  res.render("new.ejs"); //In Express, always define static routes first, and dynamic (:params) routes later.Otherwise, the dynamic ones will hijack the request.
+  res.render("listings/new.ejs"); //In Express, always define static routes first, and dynamic (:params) routes later.Otherwise, the dynamic ones will hijack the request.
   // if we write show route above from create route
   //then, when we search "localhost/listing/new" new is understand as id params
 });
@@ -44,6 +44,8 @@ router.post("/", validateListing ,wrapAsync(async (req, res,) => {
 
 const newListing = new Listing(req.body.listing); // creating new instance (extract all listing properties)
   await newListing.save();
+  req.flash("success" , "New Listing created !");
+  console.log("✅ Flash message added"); 
   res.redirect("/listings");
 })
 );
@@ -54,6 +56,10 @@ const newListing = new Listing(req.body.listing); // creating new instance (extr
 router.get("/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id).populate("reviews");
+  if(!listing){
+    req.flash("error" , "Listing you requested for does not exist");
+   return  res.redirect("/listings");
+  }
   res.render("listings/show.ejs", { listing });
 }));
 
@@ -67,6 +73,10 @@ router.get("/:id/edit",wrapAsync(async (req, res) => {
 // }
   let { id } = req.params;
   const listing = await Listing.findById(id);
+  if(!listing){
+    req.flash("error","Listing you requested for does not exist");
+   return res.redirect("/listings");
+  }
   res.render("listings/edit.ejs", { listing });
 }));
 
@@ -74,6 +84,7 @@ router.get("/:id/edit",wrapAsync(async (req, res) => {
 router.put("/:id", validateListing ,wrapAsync(async (req, res) => {
   let { id } = req.params;
   await Listing.findByIdAndUpdate(id, { ...req.body.listing }); //(2)object pass kr rhe jiske andr listing ke values ko individual value mai convert kr rhe
+  req.flash("success" , "Listing Updated !");
   res.redirect(`/listings/${id}`); // direct to show route
 }));
 
@@ -83,6 +94,7 @@ router.delete("/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
   let deletedListing = await Listing.findByIdAndDelete(id);
   console.log(deletedListing);
+  req.flash("success" , "Listing Deleted!")
   res.redirect("/listings");
 }));
 
