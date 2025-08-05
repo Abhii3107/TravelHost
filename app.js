@@ -57,7 +57,8 @@ const sessionOptions = {
 }
 
 app.get("/", (req, res) => {
-  res.send("root is Working");
+  // res.send("root is Working");
+  res.redirect("/listings");
 });
 
 app.use(session(sessionOptions));
@@ -79,6 +80,16 @@ app.use((req , res , next ) => {
 app.use("/listings" , listingRouter);
 app.use("/listings/:id/reviews" , reviewRouter);
 app.use("/",userRouter);
+
+/*app.get("/demouser" , (req,res) => {
+  let fakerUser = newUser({
+  email: "student@gmail.com",
+  username: "abhay-123"
+  });
+  
+  let registeredUser = await User.register(fakeUser , "helloword");
+  res.send(registeredUser)
+  }) */
 
 
 // app.get("/testListing", async(req,res) =>{
