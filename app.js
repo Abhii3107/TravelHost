@@ -68,12 +68,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));//jitne bhi nye user aaye unko autheticate krwana
 
-passport.serializeUser(User.serializeUser()); // serialize user into session - user ke related information session ke andr store krana - to usko ek session mai baar baar login nhi krna hoga
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser()); //save only user id  into session
+passport.deserializeUser(User.deserializeUser());//fetch users full data from session on every request
 
 app.use((req , res , next ) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currUser = req.user; 
   next();
 })
 
