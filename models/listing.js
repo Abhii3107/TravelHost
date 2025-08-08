@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema=mongoose.Schema;
 const Review = require("./review.js");
+const { type } = require("express/lib/response.js");
 
 
 const listingSchema = new Schema({
@@ -22,7 +23,11 @@ const listingSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Review"
         }
-    ]
+    ],
+    owner : {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 });
 
 listingSchema.post("findOneAndDelete" , async(listing) => { // now when any listing is deleted its review is also deleted from review collection
