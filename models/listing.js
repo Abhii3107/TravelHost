@@ -20,6 +20,19 @@ const listingSchema = new Schema({
     price: Number,
     location: String,
     country: String,
+    
+//     geometry: {         // <-- ADD THIS (GeoJSON)
+//     type: {
+//       type: String,
+//       enum: ['Point'],
+//       required: true
+//     },
+//     coordinates: {
+//       type: [Number], // [lng, lat]
+//       required: true
+//     }
+//   },
+
     reviews : [
         {
             type: Schema.Types.ObjectId,
@@ -29,8 +42,10 @@ const listingSchema = new Schema({
     owner : {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
 });
+  
+
 
 listingSchema.post("findOneAndDelete" , async(listing) => { // now when any listing is deleted its review is also deleted from review collection
     if(listing){

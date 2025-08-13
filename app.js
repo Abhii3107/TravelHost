@@ -17,6 +17,8 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
+
 const flash = require("connect-flash");
 
 const passport = require("passport");
@@ -33,7 +35,8 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl =process.env.ATLASDB_URL
 
 main()
   .then(() => {
@@ -44,15 +47,33 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 app.listen(8080, () => {
   console.log("Server is listening at port : 8080");
 });
 
+
+ // express session mai - by default hmari local storage mai session related storage store hoti hai ,To hmare session store ki default storage hoti hai - meomry storage  ,wh kwel development environment ke liye hota hai na ki production environment ke liye , only meant to debugging and developing
+ 
+ // so we other session storage - connect-mongo - which is mongodb session storage 
+
+const store = MongoStore.create({
+   mongoUrl: dbUrl,              
+  crypto:{
+    secret: process.env.SECRET
+  },
+  touchAfter: 24 * 3600, // agr session mai kuch change nhi hua , sirf refresh ho rha ,so after 1day in second  then  session infromation updated
+});
+
+store.on("error" ,() =>{
+  console.log("Error in MONGO SESSION STORE" , err);
+})
+
 const sessionOptions = {
-  secret: "mysupersecretcode",
+  store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized:true,
   cookie: {
@@ -62,10 +83,12 @@ const sessionOptions = {
   }
 }
 
-app.get("/", (req, res) => {
-  // res.send("root is Working");
-  res.redirect("/listings");
-});
+
+
+// app.get("/", (req, res) => {
+//   // res.send("root is Working");
+//   res.redirect("/listings");
+// });
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -158,6 +181,7 @@ npm i dot env
 npm i cloudinary
 npm i multer-storage-cloudinary
 
+npm i connect-mongo
 
 */
 

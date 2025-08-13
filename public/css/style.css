@@ -4,7 +4,7 @@ body{
   flex-direction: column;
   min-height: 100vh;
 }
-.conatiner{       /*<%-body%>*/
+.container{       /*<%-body%>*/
     flex: 1;
 }
 
@@ -125,3 +125,42 @@ body{
     height: 400px;
     width: 80vh;
  }
+
+ /* TravelHost icon design*/
+.travelhost-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.travelhost-brand span {
+  font-family: 'Circular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #FF385C; /* Airbnb red */
+}
+
+/* Container for plane */
+.plane-container {
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+}
+
+/* Plane float animation */
+.plane-container i.fa-paper-plane {
+  color: #FF385C;
+  font-size: 1.6rem;
+  animation: planeFloat 2.2s ease-in-out infinite;
+}
+
+/* Gentle floating movement */
+@keyframes planeFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(3deg); }
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(2px) rotate(-3deg); }
+}
+

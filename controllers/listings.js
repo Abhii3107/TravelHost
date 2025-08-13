@@ -1,5 +1,6 @@
 const Listing = require("../models/listing")
 
+const axios = require("axios");
 
 module.exports.index=async (req, res) => {
   const allListing = await Listing.find({});
@@ -16,6 +17,9 @@ module.exports.createListing  = async (req, res,) => {
 // if(!req.body.listing){
 //   throw new ExpressError(400,"send valid data for listing");
 // }
+
+  let url = req.file.path;
+  let filename = req.file.filename;
   const newListing = new Listing(req.body.listing); // creating new instance (extract all listing properties)
   newListing.owner = req.user._id;
   newListing.image = {url, filename};
@@ -24,6 +28,7 @@ module.exports.createListing  = async (req, res,) => {
   console.log("✅ Flash message added"); 
   res.redirect("/listings");
 }
+
 
 module.exports.ShowListing= async (req, res) => {
   let { id } = req.params;
@@ -73,6 +78,9 @@ module.exports.updateListing = async (req, res) => {
  req.flash("success" , "Listing Updated !");
   res.redirect(`/listings/${id}`); // direct to show route
 }
+
+
+
 
 module.exports.destroyListing = async (req, res) => {
   let { id } = req.params;

@@ -16,6 +16,8 @@
     .bindPopup("<h4>New York City</h4>");
 
 
+
+
 /*map integrated by - Leaflet + MapTiler*/
 
 // leaflet -an open-source JavaScript library
