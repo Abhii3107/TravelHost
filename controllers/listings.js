@@ -1,5 +1,6 @@
 const Listing = require("../models/listing")
 
+
 module.exports.index=async (req, res) => {
   const allListing = await Listing.find({});
   res.render("listings/index.ejs", { allListing });
@@ -15,8 +16,9 @@ module.exports.createListing  = async (req, res,) => {
 // if(!req.body.listing){
 //   throw new ExpressError(400,"send valid data for listing");
 // }
-const newListing = new Listing(req.body.listing); // creating new instance (extract all listing properties)
+  const newListing = new Listing(req.body.listing); // creating new instance (extract all listing properties)
   newListing.owner = req.user._id;
+  newListing.image = {url, filename};
   await newListing.save();
   req.flash("success" , "New Listing created !");
   console.log("✅ Flash message added"); 
@@ -52,13 +54,23 @@ module.exports.editListing = async (req, res) => {
     req.flash("error","Listing you requested for does not exist");
    return res.redirect("/listings");
   }
-  res.render("listings/edit.ejs", { listing });
+  let originalImageUrl = listing.image.url; 
+  originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250");
+  res.render("listings/edit.ejs", { listing, originalImageUrl });
 }
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
- await Listing.findByIdAndUpdate(id, { ...req.body.listing }); //(2)object pass kr rhe jiske andr listing ke values ko individual value mai convert kr rhe
-  req.flash("success" , "Listing Updated !");
+ let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }); //(2)object pass kr rhe jiske andr listing ke values ko individual value mai convert kr rhe
+  
+  if(typeof req.file !=="undefined"){
+  let url = req.file.path;
+  let filename =req.file.filename;
+  listing.image = {url, filename};
+  await listing.save();
+  }
+ 
+ req.flash("success" , "Listing Updated !");
   res.redirect(`/listings/${id}`); // direct to show route
 }
 

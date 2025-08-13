@@ -11,9 +11,11 @@ const listingSchema = new Schema({
     },
     description: String,
     image: {
-        type: String,
-        default: "https://images.unsplash.com/photo-1509233725247-49e657c54213?q=80&w=898&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,// when image field is undifined
-        set: (v) => v === "" ? "https://images.unsplash.com/photo-1509233725247-49e657c54213?q=80&w=898&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" : v, // ternary operator - agr user koi khud se image deta hai to wh hojayega , agr nhi tb default link wala image set hojayega
+        // type: String,   
+        // default: "https://images.unsplash.com/photo-1509233725247-49e657c54213?q=80&w=898&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,// when image field is undifined
+        // set: (v) => v === "" ? "https://images.unsplash.com/photo-1509233725247-49e657c54213?q=80&w=898&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" : v, // ternary operator - agr user koi khud se image deta hai to wh hojayega , agr nhi tb default link wala image set hojayega
+     url: String,
+     filename: String         
     },
     price: Number,
     location: String,

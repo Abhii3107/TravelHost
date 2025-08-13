@@ -7,16 +7,17 @@ const { saveRedirectUrl } = require("../middleware");
 
 
 const userController = require("../controllers/users.js")
-//signup page
-router.get("/signup",userController.renderSignupForm);
 
-router.post("/signup", 
-    wrapAsync(userController.signup));
+//signup page
+router.route("/signup")
+.get(userController.renderSignupForm)
+.post(wrapAsync(userController.signup));
+
 
 //login page
-router.get("/login" , userController.renderLoginForm );
-
-router.post("/login" , saveRedirectUrl, // to save originalurl in req.seesion.redirecturl before authentication
+router.route("/login")
+.get(userController.renderLoginForm )
+.post( saveRedirectUrl, // to save originalurl in req.seesion.redirecturl before authentication
     passport.authenticate('local', 
         { 
         failureRedirect: '/login',
@@ -25,7 +26,6 @@ router.post("/login" , saveRedirectUrl, // to save originalurl in req.seesion.re
    userController.login
 );
 
-router.get("/logout", userController.logout )
+router.get("/logout", userController.logout);
 
 module.exports= router;
-``

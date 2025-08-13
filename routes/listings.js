@@ -6,10 +6,49 @@ const Listing = require("../models/listing.js");
 const {listingSchema , reviewSchema} = require("../schema.js");
 const { isLoggedIn ,isOwner , validateListing} = require("../middleware.js");
 
+const multer  = require('multer');
+const {storage} = require('../cloudConfig.js')
+const upload = multer({ storage });
+
 const listingController = require("../controllers/listings.js");
 
+router.route("/")
+.get( wrapAsync(listingController.index))
+.post( 
+  isLoggedIn , 
+  validateListing ,
+  upload.single("listing[image]"),
+  wrapAsync(listingController.createListing)
+);
+
+// .post(upload.single("listing[image]"), (req, res) => {
+//     res.send(req.file);
+// });
+
+
+//New Route
+router.get("/new", isLoggedIn , listingController.renderNewForm );
+
+router.route("/:id")
+.get(wrapAsync(listingController.ShowListing))
+.put(
+  isLoggedIn 
+  ,isOwner ,
+  upload.single("listing[image]"),
+  validateListing ,
+  wrapAsync(listingController.updateListing))
+.delete(isLoggedIn ,isOwner, wrapAsync(listingController.destroyListing))
+
+//Edit Route
+router.get("/:id/edit",isLoggedIn ,isOwner ,wrapAsync(listingController.editListing));
+
+module.exports = router; 
+
+
+//------to understand------
+
 //INDEX ROUTE
-router.get("/", wrapAsync(listingController.index));
+// router.get("/", wrapAsync(listingController.index));
 
 //----------------------------------------------        
 //In Express, routes are matched top to bottom
@@ -18,29 +57,25 @@ router.get("/", wrapAsync(listingController.index));
 //then, when we search "localhost/listing/new" new is understand as id params
 
 // Create Route
-router.get("/new", isLoggedIn , listingController.renderNewForm );
 
-router.post("/", validateListing ,wrapAsync(listingController.createListing)
-);
+// router.post("/", validateListing ,wrapAsync(listingController.createListing)
+// );
 
 //-----------------------------------------
 //Show Route   -  GET /listings/:id ->specific listing Data
 
-router.get("/:id", wrapAsync(listingController.ShowListing));
+// router.get("/:id", wrapAsync(listingController.ShowListing));
 
 //----------------------------------------
 //Update -> Edit and Update Route               (1) GET/listing/:id/edit ->Edit form -> when submit -> (2) PUT/listing/:id
 
-//Edit Route
-router.get("/:id/edit",isLoggedIn ,isOwner ,wrapAsync(listingController.editListing));
 
 //Update Route
-router.put("/:id",isLoggedIn , isOwner ,
-  validateListing ,
-  wrapAsync(listingController.updateListing));
+// router.put("/:id",isLoggedIn , isOwner ,
+//   validateListing ,
+//   wrapAsync(listingController.updateListing));
 
 //Delete Route -- /listing/:id
 
-router.delete("/:id",isLoggedIn ,isOwner, wrapAsync(listingController.destroyListing));
+// router.delete("/:id",isLoggedIn ,isOwner, wrapAsync(listingController.destroyListing));
 
-module.exports = router; 

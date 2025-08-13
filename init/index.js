@@ -32,7 +32,7 @@ const initDB= async ()=>{
 //    console.log("Data is initialized");
     const allData = initData.data.map((listing) => ({
     ...listing,
-    image: typeof listing.image === "object" ? listing.image.url : listing.image,
+    // image: typeof listing.image === "object" ? listing.image.url : listing.image,
     owner: new mongoose.Types.ObjectId("689476b509c2b3b85bd7c034") 
   }));
 

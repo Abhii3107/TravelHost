@@ -1,3 +1,9 @@
+if(process.env.NODE_ENV   != "production") {
+require('dotenv').config();
+}
+
+console.log(process.env)
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -145,5 +151,13 @@ npm i connect-flash
 npm i passport
 npm i passport-local
 npm i passport-local-mongoose
+
+Upload Image
+npm i multer
+npm i dot env
+npm i cloudinary
+npm i multer-storage-cloudinary
+
+
 */
 
