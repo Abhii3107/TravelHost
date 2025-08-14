@@ -47,8 +47,15 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(dbUrl);
+  await mongoose.connect(dbUrl);  //dbUrl
 }
+
+// mongoose.connect(dbUrl, {
+
+//   tls: true
+// })
+// .then(() => console.log("Connected to DB"))
+// .catch(err => console.log("MongoDB Atlas connection error:", err));
 
 app.listen(8080, () => {
   console.log("Server is listening at port : 8080");
@@ -103,7 +110,7 @@ passport.deserializeUser(User.deserializeUser());//fetch users full data from se
 app.use((req , res , next ) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
-  res.locals.currUser = req.user; 
+  res.locals.currUser = req.user || null; //if user is logged in then req.user will have user data , otherwise it will be null
   next();
 })
 
