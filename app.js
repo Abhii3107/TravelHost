@@ -110,7 +110,10 @@ passport.deserializeUser(User.deserializeUser());//fetch users full data from se
 app.use((req , res , next ) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+
   res.locals.currUser = req.user || null; //if user is logged in then req.user will have user data , otherwise it will be null
+
+
   next();
 })
 
