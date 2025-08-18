@@ -10,6 +10,23 @@
   <div class="row mt-3">
     <div class="col-8 offset-3">
       <h3><%=listing.title%></h3>
+
+ <!-- ADDED: show type badge -->
+      <p class="card-text">
+        <span class="badge bg-secondary"><%= listing.type %></span>
+       </p>
+<% const iconMap = {
+  beach: 'fa-umbrella-beach',
+  mountain: 'fa-mountain',
+  arctic: 'fa-snowflake',
+  desert: 'fa-sun',
+  forest: 'fa-tree',
+  city: 'fa-city',
+  island: 'fa-ship',
+  trending: 'fa-fire'
+}; %>
+<p><i class="fa-solid <%= iconMap[listing.type] || 'fa-map-pin' %>"></i> <%= listing.type %></p>
+
     </div>
     <div class="card col-6 offset-3 show-card listing-card">
       <img
@@ -18,12 +35,11 @@
         alt="listing_image"
       />
       <div class="card-body">
-        <p class="card-text">Owned by - <%= listing.owner.username %></p>
-        <p class="card-text"><%=listing.country%></p>
-        <p class="card-text"><%=listing.country%></p>
+        <p class="card-text">Owned by - <%= listing.owner.username %></p>  
         <p class="card-text"> <%=listing.description%></p>
         <p class="card-text"> &#8377;<%=listing.price.toLocaleString("en-IN")%></p>
         <p class="card-text"><%=listing.location%></p>
+        <p class="card-text"><%=listing.country%></p>
          <br />
         
       </div>

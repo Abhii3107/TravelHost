@@ -16,6 +16,7 @@ const listingRouter = require("./routes/listings.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
+
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
 
@@ -35,8 +36,8 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 
 
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-const dbUrl =process.env.ATLASDB_URL
+const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+// const dbUrl =process.env.ATLASDB_URL
 
 main()
   .then(() => {
@@ -47,7 +48,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(dbUrl);  //dbUrl
+  await mongoose.connect(MONGO_URL);  //dbUrl
 }
 
 // mongoose.connect(dbUrl, {
@@ -67,7 +68,7 @@ app.listen(8080, () => {
  // so we other session storage - connect-mongo - which is mongodb session storage 
 
 const store = MongoStore.create({
-   mongoUrl: dbUrl,              
+   mongoUrl: MONGO_URL,              
   crypto:{
     secret: process.env.SECRET
   },
@@ -92,10 +93,7 @@ const sessionOptions = {
 
 
 
-app.get("/", (req, res) => {
-  // res.send("root is Working");
-  res.redirect("/listings");
-});
+
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -114,9 +112,20 @@ app.use((req , res , next ) => {
   next();
 })
 
+const searchRoutes = require("./routes/search"); // ADDED
+
+app.use("/search", searchRoutes); // ADDED
+
+app.get("/", (req, res) => {
+  // res.send("root is Working");
+  res.redirect("/listings");
+});
+
+
 app.use("/listings" , listingRouter);
 app.use("/listings/:id/reviews" , reviewRouter);
 app.use("/",userRouter);
+
 
 /*app.get("/demouser" , (req,res) => {
   let fakerUser = newUser({

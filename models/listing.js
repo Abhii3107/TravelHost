@@ -33,6 +33,15 @@ const listingSchema = new Schema({
 //     }
 //   },
 
+ // NEW: category/type
+    type: {
+      type: String,
+      enum: ["beach", "mountain", "arctic", "desert", "forest", "city", "island", "trending"],
+      required: true,
+      index: true
+    },
+
+
     reviews : [
         {
             type: Schema.Types.ObjectId,
@@ -43,6 +52,7 @@ const listingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    
 });
   
 
@@ -51,6 +61,15 @@ listingSchema.post("findOneAndDelete" , async(listing) => { // now when any list
     if(listing){
      await Review.deleteMany({_id : {$in: listing.reviews}});
     }
+});
+
+// Text index for native search fallback and general queries
+listingSchema.index({
+  title: "text",
+  description: "text",
+  location: "text",
+  country: "text",
+  tags: "text"
 });
 
 const Listing =mongoose.model("Listing",listingSchema);

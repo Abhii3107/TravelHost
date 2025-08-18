@@ -47,18 +47,18 @@
       </div>
          
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-      <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" aria-label="Search"/>
+        <form class="d-flex" role="search" action="/search" method="GET">
+      <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" aria-label="Search" name="location"/>
       <button class="btn search-btn" type="submit">
         <i class="fa-solid fa-magnifying-glass"></i>Search</button>
-
     </form>
       </div>
 
 
        <div class="navbar-nav ms-auto"> <!--if req.user is undefined - mtlb koi user login nhi hai -->
        <a class="nav-link" href="/listings/new">Become a host</a>
-
+      
+       
         <% if(!currUser) {%>  
         <a class="nav-link " href="/signup"><b>Sign up</b></a>
         <a class="nav-link" href="/login"><b>Log in</b></a>
