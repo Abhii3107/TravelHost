@@ -1,9 +1,16 @@
 <%layout("/layouts/boilerplate")%>
+<!-- ADDED: expose MapTiler key and listing coordinates for Leaflet -->
 <script>
-  //const mapToken= "" ";
-    window.mapToken = "<%= process.env.MAP_TOKEN %>";
-    
-      
+  // If you use this elsewhere, you can keep MAP_TOKEN; map tiles will use MAPTILER_KEY
+  window.mapToken = "<%= process.env.MAP_TOKEN || '' %>";                    // optional
+  window.maptileKey = "<%= process.env.MAPTILER_KEY || '' %>";               // ADDED
+  window.listingCoords = <%- JSON.stringify(
+    listing.geometry && listing.geometry.coordinates
+      ? listing.geometry.coordinates
+      : null
+  ) %>;                                                                      // ADDED [lng, lat]
+  window.listingTitle = "<%- (listing.title || '').replace(/\"/g, '\\\"') %>";      // ADDED
+  window.listingLocation = "<%- (listing.location || '').replace(/\"/g, '\\\"') %>"; // ADDED
 </script>
 
 <body>
@@ -16,14 +23,17 @@
         <span class="badge bg-secondary"><%= listing.type %></span>
        </p>
 <% const iconMap = {
+  temple: 'fa-temple',
+  Rooms: 'fa-bed',
   beach: 'fa-umbrella-beach',
   mountain: 'fa-mountain',
-  arctic: 'fa-snowflake',
-  desert: 'fa-sun',
-  forest: 'fa-tree',
   city: 'fa-city',
-  island: 'fa-ship',
-  trending: 'fa-fire'
+  camping: 'fa-campground',
+  lake: 'fa-water',
+  ski: 'fa-skiing',
+  petFriendly: 'fa-paw',
+  villa: 'fa-house',
+  boat: 'fa-ship',
 }; %>
 <p><i class="fa-solid <%= iconMap[listing.type] || 'fa-map-pin' %>"></i> <%= listing.type %></p>
 

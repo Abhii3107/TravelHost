@@ -36,11 +36,16 @@ const listingSchema = new Schema({
  // NEW: category/type
     type: {
       type: String,
-      enum: ["beach", "mountain", "arctic", "desert", "forest", "city", "island", "trending"],
+      enum:  ["temple" ,"Room", "beach", "mountain", "city", "camping",  "lake", "ski", "pet-friendly" , "Villa"  ,"Boat"],
       required: true,
       index: true
     },
-
+     
+    // ADDED: store coordinates as GeoJSON Point [lng, lat]
+     geometry: { // ADDED
+    type: { type: String, enum: ["Point"], default: "Point", required: true }, // ADDED
+     coordinates: { type: [Number], default: [77.2090, 28.6139], required: true } // ADDED (Delhi default)
+        }, // ADDED
 
     reviews : [
         {
@@ -55,7 +60,7 @@ const listingSchema = new Schema({
     
 });
   
-
+listingSchema.index({ geometry: "2dsphere" }); // ADDED
 
 listingSchema.post("findOneAndDelete" , async(listing) => { // now when any listing is deleted its review is also deleted from review collection
     if(listing){
