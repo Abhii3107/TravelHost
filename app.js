@@ -36,8 +36,8 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-// const dbUrl =process.env.ATLASDB_URL
+// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl =process.env.ATLASDB_URL
 
 main()
   .then(() => {
@@ -48,7 +48,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);  //dbUrl
+  await mongoose.connect(dbUrl);  //dbUrl
 }
 
 // mongoose.connect(dbUrl, {
@@ -68,7 +68,7 @@ app.listen(8080, () => {
  // so we other session storage - connect-mongo - which is mongodb session storage 
 
 const store = MongoStore.create({
-   mongoUrl: MONGO_URL,              
+   mongoUrl: dbUrl,              
   crypto:{
     secret: process.env.SECRET
   },
