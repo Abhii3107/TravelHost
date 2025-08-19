@@ -8,6 +8,12 @@ module.exports.listingSchema = Joi.object({
         country : Joi.string().required(),
         price : Joi.number().required().min(0),
         image : Joi.string().allow("", null),
+
+        type: Joi.string()
+      .valid("temple" ,"Room", "beach", "mountain", "city", "camping",  "lake", "ski", "pet-friendly" , "Villa"  ,"Boat")
+      .required(),
+
+
     }).required()
 });
 

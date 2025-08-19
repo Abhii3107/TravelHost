@@ -16,6 +16,7 @@ const listingRouter = require("./routes/listings.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
+
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
 
@@ -92,11 +93,6 @@ const sessionOptions = {
 
 
 
-app.get("/", (req, res) => {
-  // res.send("root is Working");
-  res.redirect("/listings");
-});
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -117,9 +113,20 @@ app.use((req , res , next ) => {
   next();
 })
 
+const searchRoutes = require("./routes/search"); // ADDED
+
+app.use("/search", searchRoutes); // ADDED
+
+app.get("/", (req, res) => {
+  // res.send("root is Working");
+  res.redirect("/listings");
+});
+
+
 app.use("/listings" , listingRouter);
 app.use("/listings/:id/reviews" , reviewRouter);
 app.use("/",userRouter);
+
 
 /*app.get("/demouser" , (req,res) => {
   let fakerUser = newUser({

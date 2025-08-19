@@ -1,19 +1,59 @@
+// public/js/map.js
+// CHANGED: Use saved listing geometry and MapTiler tiles with Leaflet
 
-//   let mapToken = mapToken; // coming from backend we cannot directly access <%= process.env.MAP_TOKEN %> in puclic folder , show we pass in ejs - show,ejs and store in mapTokenVariable(at starting)
+document.addEventListener('DOMContentLoaded', () => {
+  const coords = window.listingCoords; // [lng, lat] from GeoJSON
+  const key = window.maptileKey;
 
-  const coordinates = [28.6139, 77.2088]; // example location [lng,lat]
+  if (!coords || coords.length !== 2) {
+    // No coordinates available; skip map setup gracefully
+    return;
+  }
 
-  const map = L.map('map').setView(coordinates, 12);
+  // Leaflet expects [lat, lng]
+  const [lng, lat] = coords;
+  const center = [lat, lng];
 
-  L.tileLayer(`https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${window.mapToken}`, {
-    tileSize: 512,
-    zoomOffset: -1,
-    attribution: '&copy; OpenStreetMap contributors &copy; MapTiler'
-  }).addTo(map);
+  // Initialize Leaflet map
+  const map = L.map('map').setView(center, 12);
 
-  L.marker(coordinates)
-    .addTo(map)
-    .bindPopup("<h4>New York City</h4>");
+  // MapTiler tile layer (streets-v2)
+  L.tileLayer(
+    `https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=${key}`,
+    {
+      tileSize: 256,
+      attribution:
+        '© OpenStreetMap contributors © <a href="https://www.maptiler.com/" target="_blank">MapTiler</a>',
+    }
+  ).addTo(map);
+
+  // Marker + popup
+  const popupHtml = `
+    <div style="min-width:180px;">
+      <strong>${window.listingTitle || 'Listing'}</strong><br/>
+      ${window.listingLocation || ''}
+    </div>
+  `;
+  L.marker(center).addTo(map).bindPopup(popupHtml).openPopup();
+});
+
+
+
+// //   let mapToken = mapToken; // coming from backend we cannot directly access <%= process.env.MAP_TOKEN %> in puclic folder , show we pass in ejs - show,ejs and store in mapTokenVariable(at starting)
+
+//   const coordinates = [28.6139, 77.2088]; // example location [lng,lat]
+
+//   const map = L.map('map').setView(coordinates, 12);
+
+//   L.tileLayer(`https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${window.mapToken}`, {
+//     tileSize: 512,
+//     zoomOffset: -1,
+//     attribution: '&copy; OpenStreetMap contributors &copy; MapTiler'
+//   }).addTo(map);
+
+//   L.marker(coordinates)
+//     .addTo(map)
+//     .bindPopup("<h4>New York City</h4>");
 
 
 

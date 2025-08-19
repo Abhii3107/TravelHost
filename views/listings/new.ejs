@@ -50,8 +50,19 @@
              <input name="listing[location]" placeholder="New Delhi" type="text" class="form-control" required/>
              <div class="invalid-feedback">location should be valid</div>
         </div>
+
+     <!-- ADDED: Type dropdown -->
+        <div class="mb-3">
+          <label for="type" class="form-label tight-label">Type</label>
+          <% const TYPES_SAFE = typeof TYPES !== 'undefined' ? TYPES : ["beach","mountain","arctic","desert","forest","city","island","trending"]; %> <!-- ADDED defensive default -->
+          <select id="type" name="listing[type]" class="form-select" required>
+            <% TYPES_SAFE.forEach(function(t){ %>
+              <option value="<%= t %>"><%= t.charAt(0).toUpperCase() + t.slice(1) %></option>
+            <% }) %>
+          </select>
+        </div>
         
-        <button class="btn btn-dark add-btn mb-3">Add</button>
+ <button class="btn btn-dark add-btn mb-3">Add</button>
         
     </form>
   </div>

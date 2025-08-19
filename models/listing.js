@@ -33,6 +33,20 @@ const listingSchema = new Schema({
 //     }
 //   },
 
+ // NEW: category/type
+    type: {
+      type: String,
+      enum:  ["temple" ,"Room", "beach", "mountain", "city", "camping",  "lake", "ski", "pet-friendly" , "Villa"  ,"Boat"],
+      required: true,
+      index: true
+    },
+     
+    // ADDED: store coordinates as GeoJSON Point [lng, lat]
+     geometry: { // ADDED
+    type: { type: String, enum: ["Point"], default: "Point", required: true }, // ADDED
+     coordinates: { type: [Number], default: [77.2090, 28.6139], required: true } // ADDED (Delhi default)
+        }, // ADDED
+
     reviews : [
         {
             type: Schema.Types.ObjectId,
@@ -43,14 +57,24 @@ const listingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    
 });
   
-
+listingSchema.index({ geometry: "2dsphere" }); // ADDED
 
 listingSchema.post("findOneAndDelete" , async(listing) => { // now when any listing is deleted its review is also deleted from review collection
     if(listing){
      await Review.deleteMany({_id : {$in: listing.reviews}});
     }
+});
+
+// Text index for native search fallback and general queries
+listingSchema.index({
+  title: "text",
+  description: "text",
+  location: "text",
+  country: "text",
+  tags: "text"
 });
 
 const Listing =mongoose.model("Listing",listingSchema);
