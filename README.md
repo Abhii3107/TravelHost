@@ -3,7 +3,7 @@
 ## 🚀 Project Summary
 TravelHost is an Airbnb-inspired platform where hosts can list their properties and users can explore and interact with these listings. Travelers can search and filter listings by location or category, view property details, and leave reviews to share their experiences. The platform ensures that only creators can edit or delete their own listings and reviews, providing a secure and intuitive user experience while fostering a vibrant community of hosts and explorers.
 
-**Live Demo:** [Add Render URL here- https://travelhost-yc0y.onrender.com/]  
+**Live Demo:** https://travelhost-yc0y.onrender.com/
 
 ![TravelHost Banner](./screenshots/banner.png)
 
@@ -116,5 +116,6 @@ node app.js
 - **Nearby & Map Filters:** Enable users to find listings near their location or within a selected area on the map.  
 - **Favorites/Wishlist:** Allow users to save favorite listings for easy access later.  
 - **Advanced Reviews:** Add photo reviews, ratings breakdown, and user profiles for reviews to improve trust and engagement.  
+
 
 
