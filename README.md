@@ -90,13 +90,21 @@ node app.js
 📂 Project Structure
 .
 ├── app.js
+
 ├── controllers/
+
 ├── models/
+
 ├── routes/
+
 ├── views/
+
 ├── public/
+
 ├── middleware.js
+
 ├── utils/
+
 └── init/  (DB seeding scripts)
 
 
@@ -116,6 +124,7 @@ node app.js
 - **Nearby & Map Filters:** Enable users to find listings near their location or within a selected area on the map.  
 - **Favorites/Wishlist:** Allow users to save favorite listings for easy access later.  
 - **Advanced Reviews:** Add photo reviews, ratings breakdown, and user profiles for reviews to improve trust and engagement.  
+
 
 
 
