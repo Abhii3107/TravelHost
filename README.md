@@ -5,8 +5,8 @@ TravelHost is an Airbnb-inspired platform where hosts can list their properties 
 
 **Live Demo:** https://travelhost-yc0y.onrender.com/
 
-![TravelHost Banner](./screenshots/banner.png)
-
+### Home Page
+![Home](./public/screenshots/home.png)
 
 ## 📌 Key Features
 
@@ -37,6 +37,17 @@ TravelHost is an Airbnb-inspired platform where hosts can list their properties 
 - Friendly error pages.
 - Production-ready session management.
 
+## 🖼️ Screenshots
+
+### Login Page
+![Login](./public/screenshots/login.png)
+
+### Add New Listing Page
+![Add Listing](./public/screenshots/add.png)
+
+### Edit Listing Page
+![Edit Listing](./public/screenshots/edit_listing.png)
+
 ---
 
 ## 🛠️ Tech Stack & Architecture
@@ -49,20 +60,6 @@ TravelHost is an Airbnb-inspired platform where hosts can list their properties 
 - **Image Storage:** Cloudinary
 - **Maps & Geocoding:** Leaflet, MapTiler
 - **Validation:** Joi
-
-
-## 🖼️ Screenshots / Demo
-
-### Home Page
-![Home](./screenshots/home.png)
-
-### Listing Page
-![Listing](./screenshots/listing.png)
-
-### Review & Map
-![Reviews](./screenshots/review_map.png)
-
-*(Add more screenshots or GIFs as needed)*
 
 ---
 
@@ -125,6 +122,7 @@ node app.js
 - **Nearby & Map Filters:** Enable users to find listings near their location or within a selected area on the map.  
 - **Favorites/Wishlist:** Allow users to save favorite listings for easy access later.  
 - **Advanced Reviews:** Add photo reviews, ratings breakdown, and user profiles for reviews to improve trust and engagement.  
+
 
 
 
