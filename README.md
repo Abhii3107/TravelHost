@@ -26,9 +26,9 @@ TravelHost is an Airbnb-inspired platform where hosts can list their properties 
 - Forward geocoding on create/update to store coordinates.
 
 **Reviews & Ratings**
-- Only logged-in users can post reviews.
+- Only logged-in users can post reviews and comments.
 - Users can post ratings .
-- Only authors can delete their reviews.
+- Only authors can delete their reviews and comments.
 - Reviews auto-delete when the listing is removed.
 
 
@@ -45,8 +45,14 @@ TravelHost is an Airbnb-inspired platform where hosts can list their properties 
 ### Add New Listing Page
 ![Add Listing](./public/screenshots/add.png)
 
+### Listed Page
+![Listed](./public/screenshots/listed.png)
+
+### Rating, comments and MAP for Listed page
+![Rating](./public/screenshots/rating.png)
+
 ### Edit Listing Page
-![Edit Listing](./public/screenshots/edit_listing.png)
+![Edit Listing](./public/screenshots/edit.png)
 
 ---
 

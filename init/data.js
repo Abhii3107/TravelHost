@@ -1,3 +1,5 @@
+const { type } = require("express/lib/response");
+
 const sampleListings = [
 {
 title: "Palolem Beach Hut",
@@ -9,6 +11,7 @@ url: "https://www.global-gallivanting.com/wp-content/uploads/2019/01/art-prive-p
 price: 2200,
 location: "Palolem, Goa",
 country: "India",
+type: "beach",
 },
 {
 title: "Alleppey Backwater Houseboat",
@@ -20,6 +23,7 @@ url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/f3/1b/4a/allepp
 price: 4800,
 location: "Alappuzha, Kerala",
 country: "India",
+type: "lake",
 },
 {
 title: "Himalayan A‑Frame Cabin",
@@ -31,7 +35,9 @@ url: "https://curlytales.com/wp-content/uploads/2025/01/dhajji-house.jpg",
 price: 3500,
 location: "Manali, Himachal Pradesh",
 country: "India",
+type: "mountain",
 },
+
 {
 title: "Jaisalmer Haveli Suite",
 description: "Hand-carved sandstone suite in a restored haveli with jharokha windows and courtyard.",
@@ -42,6 +48,7 @@ url: "https://www.havelidharampura.com/assets/images/stay-at-haveli.webp",
 price: 5200,
 location: "Jaisalmer, Rajasthan",
 country: "India",
+type: "city",
 },
 {
 title: "Indo‑Portuguese Villa with Pool",
@@ -53,6 +60,7 @@ url: "https://a0.muscache.com/im/pictures/prohost-api/Hosting-801205632042901220
 price: 6200,
 location: "Assagao, Goa",
 country: "India",
+type: "Villa",
 },
 {
 title: "Munnar Tea Estate Bungalow",
@@ -64,6 +72,7 @@ url: "https://c.ndtvimg.com/2021-08/9v5l0n88_munnar_625x300_24_August_21.jpg",
 price: 4100,
 location: "Munnar, Kerala",
 country: "India",
+type: "camping",
 },
 {
 title: "Lake Pichola View Studio",
@@ -75,6 +84,7 @@ url: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/531243275.jpg?k=d588
 price: 3000,
 location: "Udaipur, Rajasthan",
 country: "India",
+type:"city",
 },
 {
 title: "Dal Lake Houseboat Suite",
@@ -86,6 +96,7 @@ url: "https://wanderon-images.gumlet.io/blogs/new/2023/11/gondola-ride-in-autumn
 price: 5400,
 location: "Srinagar, Jammu & Kashmir",
 country: "India",
+type:"lake",
 },
 {
 title: "Gokarna Cliffside Cottage",
@@ -97,6 +108,7 @@ url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/ef/41/93/zostel
 price: 2600,
 location: "Gokarna, Karnataka",
 country: "India",
+type:"beach",
 },
 {
 title: "Kutch Bhunga Hut",
@@ -108,6 +120,7 @@ url: "https://saachivillagio.com/wp-content/uploads/2022/03/Kutch_Bhunga_Standar
 price: 2400,
 location: "Dhordo, Kutch",
 country: "India",
+type:"temple",
 },
 {
 title: "Wayanad Bamboo Treehouse",
@@ -119,6 +132,7 @@ url: "https://3.imimg.com/data3/BQ/NV/MY-10533785/bamboo-tree-house.jpg",
 price: 3200,
 location: "Wayanad, Kerala",
 country: "India",
+type:"camping",
 },
 {
 title: "Luxury Desert Tent",
@@ -130,6 +144,7 @@ url: "https://media-cdn.tripadvisor.com/media/photo-s/17/4c/95/3a/exotic-luxury-
 price: 3600,
 location: "Sam Sand Dunes, Jaisalmer",
 country: "India",
+type:"beach",
 },
 {
 title: "Mukteshwar Stone Cottage",
@@ -141,6 +156,7 @@ url: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/642179898.jpg?k=bc21
 price: 2800,
 location: "Mukteshwar, Uttarakhand",
 country: "India",
+type:"mountain",
 },
 {
 title: "Marine Drive Deco Studio",
@@ -152,6 +168,7 @@ url: "https://assets.architecturaldigest.in/photos/600822f8111eef0df0a1c613/4:3/
 price: 5200,
 location: "Mumbai, Maharashtra",
 country: "India",
+type:"city"
 },
 {
 title: "Puducherry French Townhouse",
@@ -163,6 +180,7 @@ url: "https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg",
 price: 2600,
 location: "Puducherry",
 country: "India",
+type:"city"
 },
 {
 title: "Coorg Coffee Estate Homestay",
@@ -174,6 +192,7 @@ url: "https://a0.muscache.com/pictures/d302bc93-e553-4cfb-acbd-22f6e3cbc918.jpg"
 price: 2300,
 location: "Coorg, Karnataka",
 country: "India",
+type:"camping"
 },
 {
 title: "Bengaluru Skyline Apartment",
@@ -185,6 +204,7 @@ url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/b0/b6/2b/apartm
 price: 3400,
 location: "Bengaluru, Karnataka",
 country: "India",
+type:"city"
 },
 {
 title: "Candolim Modern Pool Villa",
@@ -196,6 +216,7 @@ url: "https://q-xx.bstatic.com/xdata/images/hotel/max500/326426643.jpg?k=f8e5ec5
 price: 9000,
 location: "Candolim, Goa",
 country: "India",
+type:"Villa"
 },
 {
 title: "Kasol Riverside A‑Frame",
@@ -207,6 +228,7 @@ url: "https://r2imghtlak.mmtcdn.com/r2-mmt-htl-image/htl-imgs/202109181601421004
 price: 3100,
 location: "Kasol, Himachal Pradesh",
 country: "India",
+type:"mountain"
 },
 {
 title: "Mahabaleshwar Glass Cottage",
@@ -218,6 +240,7 @@ url: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/606841931.jpg?k=4dd3
 price: 2900,
 location: "Mahabaleshwar, Maharashtra",
 country: "India",
+type:"mountain"
 },
 {
 title: "Pushkar Aravali Stone Villa",
@@ -229,6 +252,7 @@ url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFFNH8W82D4NLitiCVbx
 price: 7000,
 location: "Pushkar, Rajasthan",
 country: "India",
+type:"Villa"
 },
 {
 title: "Vagator Boho Beach Cottage",
@@ -240,6 +264,7 @@ url: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/434757197.jpg?k=703c
 price: 3300,
 location: "Vagator, Goa",
 country: "India",
+type:"beach"
 },
 {
 title: "Varanasi Ghat Heritage Room",
@@ -251,6 +276,7 @@ url: "https://assets.architecturaldigest.in/photos/600823ad56e01e341bc35522/16:9
 price: 2500,
 location: "Varanasi, Uttar Pradesh",
 country: "India",
+type:"temple"
 },
 {
 title: "Bir Hillside Homestay",
@@ -262,6 +288,7 @@ url: "https://a0.muscache.com/im/pictures/miso/Hosting-898859211387605512/origin
 price: 2200,
 location: "Bir Billing, Himachal Pradesh",
 country: "India",
+type:"mountain"
 },
 {
 title: "Colaba Heritage Studio",
@@ -273,6 +300,7 @@ url: "https://www.indiadesignworld.com/wp-content/uploads/2025/06/2.-AC_Colaba_L
 price: 3100,
 location: "Colaba, Mumbai",
 country: "India",
+type:"city"
 },
 {
 title: "Kasauli Pineview Glasshouse",
@@ -284,6 +312,7 @@ url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2IXwUAv2x2JFec2kszJ
 price: 3600,
 location: "Kasauli, Himachal Pradesh",
 country: "India",
+type:"mountain"
 },
 {
 title: "Jodhpur Blue City Rooftop",
@@ -295,6 +324,7 @@ url: "https://thumbs.dreamstime.com/b/blue-city-mehrangarh-fort-rooftop-cafe-vie
 price: 2100,
 location: "Jodhpur, Rajasthan",
 country: "India",
+type:"city"
 },
 {
 title: "Cherrapunji Cloud Cabin",
@@ -306,6 +336,7 @@ url: "https://media-cdn.tripadvisor.com/media/photo-s/15/bb/3c/77/front-porch-wi
 price: 2700,
 location: "Sohra (Cherrapunji), Meghalaya",
 country: "India",
+type:"mountain"
 },
 {
 title: "Hyderabad Terrace Garden Penthouse",
@@ -317,6 +348,7 @@ url: "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbm
 price: 8200,
 location: "Hyderabad, Telangana",
 country: "India",
+type:"city"
 },
 {
 title: "Udaipur Aravali Infinity Villa",
@@ -328,6 +360,7 @@ url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2j1EUXOtWmLz1nF2eq9
 price: 9500,
 location: "Udaipur Outskirts, Rajasthan",
 country: "India",
+type:"Villa"
 },
 ];
 
