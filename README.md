@@ -109,9 +109,10 @@ node app.js
 
 
 ## 🚀 Deployment
---Hosted on Render with MongoDB Atlas.
---Environment variables: ATLASDB_URL, CLOUD_*, SECRET, MAPTILER_KEY.
---Production-ready with secure session storage and external asset handling.
+
+- Hosted on Render with MongoDB Atlas
+- Environment variables: `ATLASDB_URL`, `CLOUD_*`, `SECRET`, `MAPTILER_KEY`
+- Production-ready with secure session storage and external asset handling
 
 
 
@@ -124,6 +125,7 @@ node app.js
 - **Nearby & Map Filters:** Enable users to find listings near their location or within a selected area on the map.  
 - **Favorites/Wishlist:** Allow users to save favorite listings for easy access later.  
 - **Advanced Reviews:** Add photo reviews, ratings breakdown, and user profiles for reviews to improve trust and engagement.  
+
 
 
 
