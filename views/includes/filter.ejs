@@ -1,0 +1,330 @@
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  rel="stylesheet"
+/>
+
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 12rem;
+  }
+
+  .filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  .filter p {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  /* Tax toggle */
+  .tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.25rem;
+    padding: 1rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  /* On small screens */
+  @media (max-width: 768px) {
+    #filters {
+      margin-left: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+
+    /* Hide filters from 5th onwards by default on mobile */
+    #filters .filter:nth-child(n + 6) {
+      display: none;
+    }
+
+    /* Show dropdown toggle ("More") on mobile */
+    #filters .more-filters-btn {
+      display: flex;
+    }
+  }
+
+  /* Desktop - hide more button */
+  .more-filters-btn {
+    display: none;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    background-color: #f3f3f3;
+    margin-top: 1rem;
+  }
+
+  .more-filters-btn:hover {
+    background-color: #eaeaea;
+  }
+</style>
+
+<!-- FILTERS NAVBAR -->
+<div id="filters">
+  <div class="filter">
+    <a href="/search?type=temple" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-torii-gate"></i></div>
+      <p>Temple</p>
+    </a>
+  </div>
+
+  <div class="filter">
+    <a href="/search?type=room" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </a>
+  </div>
+
+  <div class="filter">
+    <a href="/search?type=beach" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-umbrella-beach"></i></div>
+      <p>Beach</p>
+    </a>
+  </div>
+
+  <div class="filter">
+    <a href="/search?type=mountain" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-mountain"></i></div>
+      <p>Mountains</p>
+    </a>
+  </div>
+
+  <div class="filter">
+    <a href="/search?type=city" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-city"></i></div>
+      <p>City</p>
+    </a>
+  </div>
+
+  <!-- more filters (hidden initially on small screens) -->
+  <div class="filter">
+    <a href="/search?type=camping" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-campground"></i></div>
+      <p>Camping</p>
+    </a>
+  </div>
+
+  <div class="filter">
+    <a href="/search?type=lake" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-water"></i></div>
+      <p>Lake</p>
+    </a>
+  </div>
+
+  <div class="filter">
+    <a href="/search?type=ski" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-skiing"></i></div>
+      <p>Ski</p>
+    </a>
+  </div>
+
+  <div class="filter">
+    <a href="/search?type=pet_friendly" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-paw"></i></div>
+      <p>Pet Friendly</p>
+    </a>
+  </div>
+
+  <div class="filter">
+    <a href="/search?type=villas" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-house"></i></div>
+      <p>Villas</p>
+    </a>
+  </div>
+
+  <div class="filter">
+    <a href="/search?type=boat" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-ship"></i></div>
+      <p>Boat</p>
+    </a>
+  </div>
+
+  <!-- "More" button (only shows on mobile) -->
+  <div class="more-filters-btn" onclick="toggleMoreFilters()">
+    <i class="fa-solid fa-ellipsis"></i>&nbsp; More
+  </div>
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckDefault"
+      />
+      <label class="form-check-label" for="flexSwitchCheckDefault"
+        >Display total after taxes</label
+      >
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleMoreFilters() {
+    // Select hidden filters
+    const hiddenFilters = document.querySelectorAll(
+      "#filters .filter:nth-child(n+6)"
+    );
+    hiddenFilters.forEach((f) => {
+      f.style.display =
+        f.style.display === "none" || f.style.display === "" ? "block" : "none";
+    });
+
+    // Toggle button text/icon
+    const btn = document.querySelector(".more-filters-btn");
+    if (btn.innerHTML.includes("More")) {
+      btn.innerHTML = '<i class="fa-solid fa-angle-up"></i>&nbsp; Less';
+    } else {
+      btn.innerHTML = '<i class="fa-solid fa-ellipsis"></i>&nbsp; More';
+    }
+  }
+</script>
+
+<!-------------------------------------------->
+<!-- <style>
+        #filters {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-left: 12rem;
+        }
+        .filter{
+            text-align: center;
+            margin-right: 2rem;
+            margin-top: 2rem;
+            opacity: 0.7;
+        }
+        .filter:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+        .filter p{
+            font-size: 0.8rem;
+        }
+
+ @media (max-width: 768px) {
+  #filters .filter:nth-child(n+5) {
+    display: none; /* Hides filters from the 5th onwards */
+  }
+}
+   .tax-info{
+    display:none; 
+   }
+     
+   .tax-toggle{
+    border: 1px solid black  ;
+    border-radius: 1rem;
+    height: 3.25rem;
+    padding: 1rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+   }
+    </style>
+
+  <div id="filters">
+    <div class="filter">
+      <a href="/search?type=temple" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-torii-gate"></i></div>
+      <p>Temple</p>
+      </a>
+    </div>
+
+    <div class="filter">
+     <a href="/search?type=room" class="text-decoration-none text-dark">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+      </a>
+    </div>
+
+    <div class="filter">
+      <a href="/search?type=beach" class="text-decoration-none text-dark">
+     <div><i class="fa-solid fa-umbrella-beach"></i></div>
+     <p>Beach</p>
+     </a>
+     </div>
+
+  <div class="filter">
+     <a href="/search?type=mountain" class="text-decoration-none text-dark">
+    <div><i class="fa-solid fa-mountain"></i></div>
+    <p>Mountains</p>
+    </a>
+  </div>
+
+  <div class="filter">
+     <a href="/search?type=city" class="text-decoration-none text-dark">
+    <div><i class="fa-solid fa-city"></i></div>
+    <p>City</p>
+    </a>
+  </div>
+
+  <div class="filter">
+     <a href="/search?type=camping" class="text-decoration-none text-dark">
+    <div><i class="fa-solid fa-campground"></i></div>
+    <p>Camping</p>
+    </a>
+  </div>
+
+  <div class="filter">
+     <a href="/search?type=lake" class="text-decoration-none text-dark">
+    <div><i class="fa-solid fa-water"></i></div>
+    <p>Lake</p>
+    </a>
+  </div>
+
+  <div class="filter">
+     <a href="/search?type=ski" class="text-decoration-none text-dark">
+    <div><i class="fa-solid fa-skiing"></i></div>
+    <p>Ski</p>
+    </a>
+  </div>
+
+  <div class="filter">
+     <a href="/search?type=pet_friendly" class="text-decoration-none text-dark">
+    <div><i class="fa-solid fa-paw"></i></div>
+    <p>Pet Friendly</p>
+    </a>
+  </div>
+
+  <div class="filter">
+     <a href="/search?type=villas" class="text-decoration-none text-dark">
+    <div><i class="fa-solid fa-house"></i></div>
+    <p>Villas</p>
+    </a>
+  </div>
+  
+  <div class="filter">
+     <a href="/search?type=boat" class="text-decoration-none text-dark">
+  <div><i class="fa-solid fa-ship"></i></div>
+  <p>Boat</p>
+  </a>
+</div>
+
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+</div>
+  </div>
+</div>
+  </div>  -->
