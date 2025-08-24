@@ -121,10 +121,18 @@
               <!-- <p class="card-text"><%= review.rating %> stars</p> -->
                
             </div>
+            
+             <!-- Only show Delete button to the author of this review -->
+          <% const reviewAuthorId = review.author && review.author._id ?
+          review.author._id : review.author; if (currUser && reviewAuthorId &&
+          String(reviewAuthorId) === String(currUser._id)) { %>
+
             <form  class="mb-3" method="POST" 
             action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE"> <!--listingid- kyuki we want listing mai se us review ka reference ,delete ho jaye, aur uske liye review id and listing id dono routes mai hone chayie taki unko query mai se extract krke - operation kiya jaye-->
               <button class="btn btn-sm btn-dark mt-1">Delete</button>
             </form>
+             <% } %>
+
           </div>
           <%}%>
         </div>
