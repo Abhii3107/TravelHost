@@ -1,43 +1,85 @@
 <style>
-  .search-btn{
-    background-color:  #FF385C;
+  .search-btn {
+    background-color: #ff385c;
     color: #fff;
     border-radius: 25px;
     padding: 0 1rem 0 1rem;
-    
   }
-  .search-btn:hover{
-    background-color:  #FF385C;
+  .search-btn:hover {
+    background-color: #ff385c;
     color: #fff;
   }
-  .search-btn i{
+  .search-btn i {
     display: inline;
     margin-right: 1rem;
   }
-  .search-inp{
+  .search-inp {
     border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem ;
+    padding: 0.5rem 3rem 0.5rem 3rem;
   }
 
+  /* Ensure navbar uses a light scheme so toggler icon is visible */
+  .navbar.bg-body-light {
+    background-color: #ffffff !important; /* optional, keeps bar white at all sizes */
+  } /* [2][7] */
 
+  /* Make the collapsed menu (mobile) render on a white panel */
+  @media (max-width: 767.98px) {
+    /* Bootstrap md breakpoint below */
+    .navbar .navbar-collapse {
+      background: #ffffff; /* white panel behind links and form */
+      padding: 0.75rem 1rem; /* breathing room */
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* separation from page */
+      z-index: 1050; /* above page content */
+    } /* [2][7] */
+
+    /* Make inner nav blocks stack nicely */
+    .navbar .navbar-nav {
+      width: 100%;
+    } /* [2][7] */
+
+    /* Ensure the search form fills width and doesn’t squeeze */
+    .navbar .d-flex[role="search"] {
+      width: 100%;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    } /* [2][7] */
+
+    .navbar .search-inp {
+      width: 100%;
+    } /* [2][7] */
+  }
 </style>
-
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
     <!-- <a class="navbar-brand" href="/listings" ><i class="fa-regular fa-compass"></i></a> -->
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
 
-<a class="navbar-brand travelhost-brand" href="/listings" aria-label="TravelHost home">
-  <div class="plane-container">
-    <i class="fa-solid fa-paper-plane"></i>
-  </div>
-  <span>TravelHost</span>
-</a>
+    <a
+      class="navbar-brand travelhost-brand"
+      href="/listings"
+      aria-label="TravelHost home"
+    >
+      <div class="plane-container">
+        <i class="fa-solid fa-paper-plane"></i>
+      </div>
+      <span>TravelHost</span>
+    </a>
 
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -45,30 +87,33 @@
         <!-- <a class="nav-link " href="/">Home</a> -->
         <a class="nav-link" href="/listings">Explore</a>
       </div>
-         
+
       <div class="navbar-nav ms-auto">
         <form class="d-flex" role="search" action="/search" method="GET">
-      <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" aria-label="Search" name="location"/>
-      <button class="btn search-btn" type="submit">
-        <i class="fa-solid fa-magnifying-glass"></i>Search</button>
-    </form>
+          <input
+            class="form-control me-2 search-inp"
+            type="search"
+            placeholder="Search destinations"
+            aria-label="Search"
+            name="location"
+          />
+          <button class="btn search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
+        </form>
       </div>
 
+      <div class="navbar-nav ms-auto">
+        <!--if req.user is undefined - mtlb koi user login nhi hai -->
+        <a class="nav-link" href="/listings/new">Become a host</a>
 
-       <div class="navbar-nav ms-auto"> <!--if req.user is undefined - mtlb koi user login nhi hai -->
-       <a class="nav-link" href="/listings/new">Become a host</a>
-      
-       
-        <% if(!currUser) {%>  
-        <a class="nav-link " href="/signup"><b>Sign up</b></a>
+        <% if(!currUser) {%>
+        <a class="nav-link" href="/signup"><b>Sign up</b></a>
         <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } %> <% if (currUser) { %>
+        <a class="nav-link" href="/logout"><b>Log out</b></a>
         <% } %>
-        <% if (currUser) { %>
-         <a class="nav-link" href="/logout"><b>Log out</b></a>
-        <% } %>
-        
       </div>
     </div>
   </div>
-
 </nav>
